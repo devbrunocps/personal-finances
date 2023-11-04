@@ -7,16 +7,16 @@ main {
 
 /*                HEADER                  */
 
-header.months {
-    height: 5rem;
+header.months, header.last-months {
+    min-height: 4rem;
     background-color: transparent;
     border-bottom: 0.4rem solid #474747;
     padding: 0;
 }
 
-header.months .title span {
-    font-size: 1.5rem;
-    font-weight: bold;
+header.months .title span, header.months, header.last-months .title span {
+    font-size: 1.8rem;
+    font-weight: 800;
     color: #474747;
 }
 
@@ -39,6 +39,9 @@ section.container {
 
 section.container .left {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 section.container .left .title {
@@ -48,18 +51,56 @@ section.container .left .title {
 
 section.container .left .title span {
     font-size: 1.5rem;
-    font-weight: 700;
-    color: #474747
+    font-weight: bold;
+    color: #474747;
 }
 
 section.container .left form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
 }
 
 section.container .left form .input-group {
+    width: 60%;
     display: flex;
     flex-direction: column;
+    gap: 0.2rem;
+}
+
+section.container .left form .input-group label {
+    font-size: 1.1rem;
+    color: #232323;
+    font-weight: 500;
+}
+
+section.container .left form .input-group input, section.container .left form .input-group select {
+    background-color: #353535;
+    box-shadow: 0px 0px 3px 1px #232323;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+}
+
+section.container .left form .btn {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+section.container .left form .btn button {
+    background-color: #353535;
+    box-shadow: 0px 0px 2px 1px #232323;
+    border: none;
+    width: 40%;
+    padding: 0.7rem 0;
+    color: #fff;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
 }
 
 
@@ -95,6 +136,18 @@ section.container .right .summary::-webkit-scrollbar-track {
 section.container .right .summary::-webkit-scrollbar-thumb {
     background-color: #1f1f1f;
     border-radius: 20px;
+}
+
+section.container .right .summary .balance {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+section.container .right .summary .balance span {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 section.container .right .summary .btns {
@@ -136,11 +189,16 @@ section.container .right .summary .list .item {
     background-color: #353535;
     box-shadow: 0px 0px 5px 1px #232323;
     border-radius: 0.4rem;
-    padding: 1rem;
+    padding: 1rem 2rem;
     gap: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+}
+
+section.container .right .summary .list .item .name {
+    width: 70%;
+    text-align: flex-start;
 }
 
 section.container .right .summary .list .item .name span {
@@ -148,6 +206,11 @@ section.container .right .summary .list .item .name span {
     color: #fff;
     font-weight: 500;
     text-transform: uppercase;
+}
+
+section.container .right .summary .list .item .value-earning, section.container .right .summary .list .item .value-expense {
+    width: 30%;
+    text-align: end;
 }
 
 section.container .right .summary .list .item .value-earning span {
@@ -162,12 +225,11 @@ section.container .right .summary .list .item .value-expense span {
     font-weight: 500;
 }
 
-section.container .right .summary .list .item .name {
-    width: 70%;
-    text-align: flex-start;
+section.container .right .summary .list .item .delete{
+    color: #fff;
+    cursor: pointer;
 }
 
-section.container .right .summary .list .item .value {
-    width: 30%;
-    text-align: end;
-}
+
+
+

@@ -3,92 +3,116 @@ import { createContext, useState } from "react";
 export const Context = createContext({})
 
 export default function ContextProvider({ children }) {
-    const [users, setUsers] = useState([
+    const initialState = [
         {
-            info: {
-                firstname: "Bruno",
-                lastname: "Campos"
-            },
             months: {
                 january: {
-                    balance: 5280,
-                    earnings: [
-                        {name: 'Salário', value: 2490},
-                        {name: 'Décimo Terceiro', value: 2490},
-                        {name: 'Décimo Terceiro', value: 2490},
-                        {name: 'Décimo Terceiro', value: 2490},
-                        {name: 'Décimo Terceiro', value: 2490},
-                        {name: 'Décimo Terceiro', value: 2490},
-                        {name: 'Férias', value: 3800},
-                        {name: 'Férias', value: 3800}
-                    ],
-                    expenses: [
-                        {name: 'Mercado', value: 1200},
-                        {name: 'Contas', value: 1800},
-                        {name: 'Lazer', value: 500},
-                    ]
+                    balance: 0,
+                    earnings: [],
+                    expenses: [],
                 },
                 february: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 march: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 april: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 may: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 june: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 july: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 august: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 september: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 october: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 november: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
+                    expenses: [],
                 },
                 december: {
                     balance: 0,
                     earnings: [],
-                    expenses: []
-                }
-            }
+                    expenses: [],
+                },
+            },
         }
-    ])
+    ]
+
+    const [users, setUsers] = useState(() => {
+        let storedItems =  localStorage.getItem('personal-finances')
+        if(!storedItems) return initialState
+        let items = JSON.parse(storedItems)
+        return items
+    })
+
+
+    let addEarning = (obj, month) => {
+        setUsers((currentState) => {
+            currentState[0].months[month].earnings.unshift(obj)
+
+            let earningsValue = currentState[0].months[month].earnings.reduce((accumulator, element) => accumulator + element.value, 0)
+            let expensesValue = currentState[0].months[month].expenses.reduce((accumulator, element) => accumulator + element.value, 0)
+            let balance = earningsValue - expensesValue
+
+            currentState[0].months[month].balance = balance
+
+            localStorage.setItem('personal-finances', JSON.stringify(currentState))
+            return currentState
+        })
+    }
+
+    let addExpense = (obj, month) => {
+        setUsers((currentState) => {
+            currentState[0].months[month].expenses.unshift(obj)
+
+            let earningsValue = currentState[0].months[month].earnings.reduce((accumulator, element) => accumulator + element.value, 0)
+            let expensesValue = currentState[0].months[month].expenses.reduce((accumulator, element) => accumulator + element.value, 0)
+            let balance = earningsValue - expensesValue
+
+            currentState[0].months[month].balance = balance
+
+            localStorage.setItem('personal-finances', JSON.stringify(currentState))
+            return currentState
+        })
+    }
 
     const value = {
         users,
+        setUsers,
+        addEarning,
+        addExpense,
     }
 
     return (
